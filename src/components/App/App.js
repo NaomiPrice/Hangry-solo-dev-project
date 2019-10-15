@@ -20,6 +20,7 @@ import RestaurantPage from '../RestaurantPage/RestaurantPage';
 import CreateCollection from '../CreateCollection/CreateCollection';
 import CreateRestaurant from '../CreateRestaurant/CreateRestaurant';
 import CreateNote from '../CreateNote/CreateNote';
+import EditNote from '../EditNote/EditNote';
 
 import './App.css';
 
@@ -99,7 +100,16 @@ class App extends Component {
                   match={navProps.match}
                   history={navProps.history}/>
               )}
-            />        
+            />
+
+            <ProtectedRoute
+              path="/editNote/:id"
+              render={(navProps)=>(
+                <EditNote 
+                  match={navProps.match}
+                  history={navProps.history}/>
+              )}
+            />         
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
