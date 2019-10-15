@@ -16,6 +16,7 @@ class LoginPage extends Component {
         payload: {
           username: this.state.username,
           password: this.state.password,
+          firstName: this.state.firstName,
         },
       });
     } else {
@@ -43,6 +44,15 @@ class LoginPage extends Component {
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>
+          <label htmlFor="firstName">
+              First Name:
+              <input
+                type="text"
+                name="frstName"
+                value={this.state.firstName}
+                onChange={this.handleInputChangeFor('firstName')}
+              />
+            </label>
             <label htmlFor="username">
               Username:
               <input
