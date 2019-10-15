@@ -8,7 +8,7 @@ import {
 
 import {connect} from 'react-redux';
 
-import Nav from '../Nav/Nav';
+// import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
@@ -18,8 +18,10 @@ import UserPage from '../UserPage/UserPage';
 import CollectionPage from '../CollectionPage/CollectionPage';
 import RestaurantPage from '../RestaurantPage/RestaurantPage';
 import CreateCollection from '../CreateCollection/CreateCollection';
+import CreateRestaurant from '../CreateRestaurant/CreateRestaurant';
 
 import './App.css';
+
 
 
 class App extends Component {
@@ -79,6 +81,15 @@ class App extends Component {
                   history={navProps.history}/>
               )}
             />       
+
+            <ProtectedRoute
+              path="/addRestaurant/:id"
+              render={(navProps)=>(
+                <CreateRestaurant 
+                  match={navProps.match}
+                  history={navProps.history}/>
+              )}
+            />    
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
