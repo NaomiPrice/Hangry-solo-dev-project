@@ -5,6 +5,7 @@ class RegisterPage extends Component {
   state = {
     username: '',
     password: '',
+    firstName: '',
   };
 
   registerUser = (event) => {
@@ -16,6 +17,7 @@ class RegisterPage extends Component {
         payload: {
           username: this.state.username,
           password: this.state.password,
+          firstName: this.state.firstName,
         },
       });
     } else {
@@ -40,9 +42,25 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
+        <button
+            type="button"
+            className="link-button"
+            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
+          >
+            Back to login page
+          </button>
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+          <p>Create an account to start collecting your restaurants.</p>
           <div>
+          <label htmlFor="firstName">
+              First Name:
+              <input
+                type="text"
+                name="firstName"
+                value={this.state.firstName}
+                onChange={this.handleInputChangeFor('firstName')}
+              />
+            </label>
             <label htmlFor="username">
               Username:
               <input
@@ -69,19 +87,11 @@ class RegisterPage extends Component {
               className="register"
               type="submit"
               name="submit"
-              value="Register"
+              value="CREATE ACCOUNT"
             />
           </div>
         </form>
-        <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
-            Login
-          </button>
-        </center>
+      
       </div>
     );
   }
