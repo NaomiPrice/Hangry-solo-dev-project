@@ -53,7 +53,11 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={UserPage}
+              render={(navProps)=>(
+                <UserPage 
+                  match={navProps.match}
+                  history={navProps.history}/>
+              )}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the collection page instead. */}
@@ -76,7 +80,7 @@ class App extends Component {
             />   
 
             <ProtectedRoute
-              path="/addCollection/:id"
+              path="/addCollection"
               render={(navProps)=>(
                 <CreateCollection 
                   match={navProps.match}
@@ -85,7 +89,7 @@ class App extends Component {
             />       
 
             <ProtectedRoute
-              path="/addRestaurant/:id"
+              path="/addRestaurant"
               render={(navProps)=>(
                 <CreateRestaurant 
                   match={navProps.match}

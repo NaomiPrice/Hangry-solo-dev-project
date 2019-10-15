@@ -17,7 +17,7 @@ form {
     border-radius: 2px;
 }
 
-input {
+/* input {
     margin: 5px;
     margin-bottom: 10px;
 }
@@ -34,7 +34,7 @@ input {
 
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #008183;
-}
+} */
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
@@ -46,4 +46,17 @@ input {
     outline:0;
     border-bottom:1px solid #444; 
     cursor: pointer;
+}
+button{
+    background-color: #99ccc4;
+    padding: 15px;
+    border: 1px solid #39403f;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.displayCollections{
+    width: 300px;
+    border: 1px solid #39403f;
+    margin: 10px auto 10px auto;
 }

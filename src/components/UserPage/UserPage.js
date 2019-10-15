@@ -1,29 +1,45 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
-const UserPage = (props) => (
-  <div>
-    <LogOutButton className="log-in" />
-    <h1 id="welcome">
-      Welcome, { props.user.username }!
-    </h1>
-    <p>Your ID is: {props.user.id}</p>
-    <button>ADD COLLECTION BTN</button>
-    <button>ADD RESTAURANT BTN</button>
-    <div className="displayCollections">User collections displayed here</div>
-  </div>
-);
+class UserPage extends Component {
+  
+  addCollection = ()=>{
+    this.props.history.push('/addCollection');
+  }
 
-// Instead of taking everything from state, we just want the user info.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({user}) => ({ user });
-const mapStateToProps = state => ({
-  user: state.user,
-});
+  addRestaurant = ()=>{
+    this.props.history.push('/addRestaurant');
+  }
 
-// this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserPage);
+  render(){
+    return(
+    <div>
+      <LogOutButton className="log-in" />
+      <h1 id="welcome">
+        Welcome, { this.props.reduxState.user.firstName }!
+      </h1>
+  
+      <button onClick={this.addCollection}>ADD COLLECTION</button>
+      <button onClick={this.addRestaurant}>ADD RESTAURANT</button>
+      <p>Collections:</p>
+      <div className="displayCollections">
+        { !this.props.reduxState ? 
+          <div>collection info here</div> : 
+          <div>No collections yet...please add one!</div>
+        }
+      </div>
+    </div>
+    )
+  }
+} 
+
+
+const putReduxStateOnProps = (reduxState) => ({
+  reduxState
+})
+
+export default connect(putReduxStateOnProps)(UserPage);
