@@ -33,6 +33,12 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
+        <h2>Welcome to Hangry! </h2>
+          <p>A place where you can store all the restaurants you 
+          want to try and the tried and true ones you love. Make a quick and easy decision 
+          on where to eat even when you are too hungry to think! Log In here or click 
+          ‘Create an Account’ to get started!</p>
+        
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -44,15 +50,6 @@ class LoginPage extends Component {
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>
-          <label htmlFor="firstName">
-              First Name:
-              <input
-                type="text"
-                name="frstName"
-                value={this.state.firstName}
-                onChange={this.handleInputChangeFor('firstName')}
-              />
-            </label>
             <label htmlFor="username">
               Username:
               <input
@@ -83,13 +80,14 @@ class LoginPage extends Component {
             />
           </div>
         </form>
+        <p>or</p>
         <center>
           <button
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
-            Register
+            Create an Account
           </button>
         </center>
       </div>
