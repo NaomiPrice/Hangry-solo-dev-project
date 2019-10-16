@@ -18,8 +18,8 @@ class CollectionPage extends Component {
     }) 
   }
   componentDidMount = ()=>{
-    this.props.dispatch({type: 'GET_COLLECTIONS'})
-    this.props.dispatch({type: 'GET_RESTAURANTS'})
+    this.props.dispatch({type: 'GET_COLLECTIONS'});
+    this.props.dispatch({type: 'GET_RESTAURANTS', payload: this.props.match.params.id});
   }
 
   componentDidUpdate = (prevProps)=>{
@@ -36,9 +36,9 @@ class CollectionPage extends Component {
         <div>
           <button onClick={this.navHome}>HOME</button>
           <h1>{this.state.collectionName}</h1>
-          <p>
+          <div>
             list of restaurants here
-          </p>
+          </div>
           <button>TELL ME WHERE TO EAT</button>
         </div>
       );
