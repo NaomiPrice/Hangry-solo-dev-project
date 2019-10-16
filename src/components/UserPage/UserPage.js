@@ -6,7 +6,9 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
 class UserPage extends Component {
-  
+  componentDidMount = ()=>{
+    this.props.dispatch({type: 'GET_COLLECTIONS'})
+  }
   addCollection = ()=>{
     this.props.history.push('/addCollection');
   }
@@ -27,6 +29,7 @@ class UserPage extends Component {
       <button onClick={this.addRestaurant}>ADD RESTAURANT</button>
       <p>Collections:</p>
       <div className="displayCollections">
+        {JSON.stringify(this.props.reduxState)}
         { !this.props.reduxState ? 
           <div>collection info here</div> : 
           <div>No collections yet...please add one!</div>
