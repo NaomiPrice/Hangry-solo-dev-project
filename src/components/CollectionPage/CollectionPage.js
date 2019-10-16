@@ -4,15 +4,38 @@ import {connect} from 'react-redux';
 
 
 class CollectionPage extends Component {
+  state = {
+    collectionName: 'not yet'
+  }
+  getCollectionName = ()=>{
+    let collection = this.props.reduxState.collections
+    collection.forEach((item)=>{
+      if (item.id === Number(this.props.match.params.id)){
+        this.setState({
+          collectionName: item.name
+        })
+      }
+    }) 
+  }
+  componentDidMount = ()=>{
+    this.props.dispatch({type: 'GET_COLLECTIONS'})
+    this.props.dispatch({type: 'GET_RESTAURANTS'})
+  }
 
+  componentDidUpdate = (prevProps)=>{
+    if (this.props.reduxState.collections !== prevProps.reduxState.collections){
+      this.getCollectionName();
+    }
+  }
   navHome = ()=>{
     this.props.history.push('/home')
+
   }
     render(){
       return (
         <div>
           <button onClick={this.navHome}>HOME</button>
-          <h1>Collection Name Here</h1>
+          <h1>{this.state.collectionName}</h1>
           <p>
             list of restaurants here
           </p>
