@@ -7,7 +7,11 @@ class CreateCollection extends Component {
     state = {
         newCollection: ''
     }
-    
+    handleChange = (event)=>{
+      this.setState({
+        newCollection: event.target.value
+      })
+    }
     saveCollection = ()=>{
         console.log('save button clicked')
         // post collection to DB
@@ -21,7 +25,10 @@ class CreateCollection extends Component {
         <div>
           <button onClick={this.navBack}>BACK</button>  
           <h1>Add a new collection</h1>
-          <input placeholder="New Collection" value={this.state.newCollection}></input>
+          <input placeholder="New Collection" 
+                 value={this.state.newCollection} 
+                 onChange={this.handleChange}></input>
+          <br></br>
           <button onClick={this.saveCollection}>SAVE</button>
         </div>
       );

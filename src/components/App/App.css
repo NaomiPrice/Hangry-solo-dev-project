@@ -53,10 +53,23 @@ button{
     border: 1px solid #39403f;
     border-radius: 5px;
     margin: 5px;
+    width: 100px;
 }
 
 .displayCollections{
     width: 300px;
     border: 1px solid #39403f;
     margin: 10px auto 10px auto;
+}
+
+input {
+    border: 1px solid #39403f;
+}
+
+textarea{
+    border: 1px solid #39403f;
+}
+
+select{
+    border: 1px solid #39403f;
 }

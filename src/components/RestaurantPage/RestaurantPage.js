@@ -6,18 +6,23 @@ import {connect} from 'react-redux';
 class RestaurantPage extends Component {
 
     addNote = ()=>{
-        this.props.history.push(`/createNote/`)
+        this.props.history.push(`/addNote/2`)
     }
     navHome = ()=>{
         this.props.history.push('/home')
     }
-    navBack = ()=>{
-        this.props.history.goBack();
+    goToCollection = ()=>{
+        this.props.history.push('/collection/2');
+    }
+    deleteRestaurant = ()=>{
+      //confirmation modal before deleting restaurant if yes...
+      //fire off dispatch to delete restaurant from DB
+     console.log('delete button clicked!')
     }
     render(){
       return (
         <div>
-          <button onClick={this.navBack}>BACK</button>  
+          <button onClick={this.goToCollection}>COLLECTION LIST</button>  
           <button onClick={this.deleteRestaurant}>DELETE RESTAURANT</button>
           <button onClick={this.navHome}>HOME</button>
           <h1>Restaurant Name Here</h1>
