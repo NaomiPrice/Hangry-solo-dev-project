@@ -17,7 +17,16 @@ class UserPage extends Component {
     this.props.history.push('/addRestaurant');
   }
 
+  goToCollection = (id)=>{
+    this.props.history.push(`/collection/${id}`)
+  }
+
   render(){
+    const collections = this.props.reduxState.collections.map((collection)=>{
+      return <div key={collection.id} 
+                  className="collection"
+                  onClick={()=>this.goToCollection(collection.id)}>{collection.name}</div>
+    })
     return(
     <div>
       <LogOutButton className="log-in" />
@@ -29,9 +38,8 @@ class UserPage extends Component {
       <button onClick={this.addRestaurant}>ADD RESTAURANT</button>
       <p>Collections:</p>
       <div className="displayCollections">
-        {JSON.stringify(this.props.reduxState)}
-        { !this.props.reduxState ? 
-          <div>collection info here</div> : 
+        { this.props.reduxState.collections[0] ? 
+          <div>{collections}</div> : 
           <div>No collections yet...please add one!</div>
         }
       </div>
