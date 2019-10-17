@@ -28,10 +28,19 @@ function* getOneNote (action){
     }
 }
 
+function* updateNote (action){
+    try{
+        yield axios.put(`/api/notes`, action.payload);
+    }catch (error){
+        console.log('error updating the note', error);
+    }
+}
+
 function* notesSaga() {
     yield takeLatest('GET_NOTES', getNotes);
     yield takeLatest('ADD_NOTE', addNote);
     yield takeLatest('GET_ONE_NOTE', getOneNote);
+    yield takeLatest('UPDATE_NOTE', updateNote);
   }
   
   export default notesSaga;

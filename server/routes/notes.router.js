@@ -27,7 +27,6 @@ router.get('/update/:id', (req, res) => {
                     WHERE "notes".id = $1;`;
     pool.query(queryText, [noteId])
     .then((result)=>{
-        console.log(result.rows)
         res.send(result.rows);
     }).catch((error)=>{
         console.log('error getting restaurant data', error),
@@ -39,7 +38,7 @@ router.post('/', (req, res) => {
     const restaurantId = req.body.restaurantId;
     const userId = req.user.id;
     const newNote = req.body.newNote;
-    console.log(restaurantId, userId, newNote);
+    
     let queryText = `INSERT INTO "notes" ("notes_field", "user_id", "restaurant_id")
                     VALUES ($1, $2, $3);`;
     pool.query(queryText, [newNote, userId, restaurantId])
@@ -51,4 +50,19 @@ router.post('/', (req, res) => {
     })
 });
 
+router.put('/', (req, res)=> {
+    const newNote = req.body.newNote;
+    const noteId = req.body.noteId;
+    console.log(newNote, noteId);
+    let queryText = `UPDATE "notes"
+	                    SET "notes_field" = $1, "date_time_modified" = CURRENT_TIMESTAMP
+                    WHERE "notes".id = $2;`;
+    pool.query(queryText, [newNote, noteId])
+    .then((result)=>{
+        res.sendStatus(200);
+    }).catch((error)=>{
+        console.log('error updating note', error),
+        res.sendStatus(500);
+    })
+})
 module.exports = router;

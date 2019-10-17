@@ -28,7 +28,7 @@ class EditNote extends Component {
 
     saveNote = ()=>{
         console.log('save button clicked')
-        // post collection to DB
+        this.props.dispatch({type: 'UPDATE_NOTE', payload: this.state})
         this.navBack();
     }
     navBack = ()=>{
