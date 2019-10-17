@@ -5,16 +5,16 @@ import {connect} from 'react-redux';
 
 class RestaurantPage extends Component {
 
-    addNote = ()=>{
-        this.props.history.push(`/addNote/2`)
+    addNote = (id)=>{
+        this.props.history.push(`/addNote/${id}`)
     }
     navHome = ()=>{
         this.props.history.push('/home')
     }
-    goToCollection = ()=>{
-        this.props.history.push('/collection/2');
+    goToCollection = (id)=>{
+        this.props.history.push(`/collection/${id}`);
     }
-    deleteRestaurant = ()=>{
+    deleteRestaurant = (id)=>{
       //confirmation modal before deleting restaurant if yes...
       //fire off dispatch to delete restaurant from DB
      console.log('delete button clicked!')
@@ -22,18 +22,32 @@ class RestaurantPage extends Component {
     componentDidMount = ()=>{
       this.props.dispatch({type: 'GET_COLLECTIONS'});
       this.props.dispatch({type: 'GET_SINGLE_RESTAURANT', payload: this.props.match.params.id});
+      this.props.dispatch({type: 'GET_NOTES', payload: this.props.match.params.id});
+    }
+
+    componentDidUpdate = (prevProps)=>{
+      if (this.props.reduxState.singleRestaurant !== prevProps.reduxState.singleRestaurant){
+        console.log('component updated!');
+      }
     }
     render(){
+      const notes = this.props.reduxState.notes.map((note)=>{
+        return <div key={note.id} 
+                    className="note"
+                    onClick={()=>this.editNote(note.id)}>{note.notes_field}</div>
+      })
+      const restaurant = this.props.reduxState.singleRestaurant;
       return (
         <div>
-          <button onClick={this.goToCollection}>COLLECTION LIST</button>  
+          <button onClick={()=>{this.goToCollection(restaurant.collection_id)}}>COLLECTION LIST</button>  
           <button onClick={this.deleteRestaurant}>DELETE RESTAURANT</button>
           <button onClick={this.navHome}>HOME</button>
-          <h1>Restaurant Name Here</h1>
-          <h2>collection Name Here</h2>
+      
+          <h1>{restaurant.name}</h1>
+          <h2>{restaurant.collection}</h2>
           <div>Info coming in from Google</div>
-          <div>Notes list here</div>
-          <button onClick={this.addNote}>ADD NOTE</button>
+          <div>{notes}</div>
+          <button onClick={()=>{this.addNote(restaurant.id)}}>ADD NOTE</button>
         </div>
       );
     }

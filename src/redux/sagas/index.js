@@ -5,6 +5,7 @@ import userSaga from './userSaga';
 import collectionSaga from './collectionSaga';
 import restaurantSaga from './restaurantSaga';
 import singleRestaurantSaga from './singleRestauratnSaga';
+import notesSaga from './notesSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     collectionSaga(),
     restaurantSaga(),
     singleRestaurantSaga(),
+    notesSaga(),
   ]);
 }

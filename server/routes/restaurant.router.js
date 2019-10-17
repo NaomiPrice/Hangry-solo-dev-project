@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.get('/single/:id', (req, res) => {
+router.get('/notes/:id', (req, res) => {
     const restaurantId = req.params.id;
     // const userId = req.user.id
     let queryText = `SELECT *
@@ -28,7 +28,23 @@ router.get('/single/:id', (req, res) => {
                     JOIN "notes"
                         ON "notes".restaurant_id = "restaurants".id
                     WHERE "restaurants".id = $1;`;
-    console.log('restaurant id:', restaurantId);
+    pool.query(queryText, [restaurantId])
+    .then((result)=>{
+        res.send(result.rows);
+    }).catch((error)=>{
+        console.log('error getting restaurant data', error),
+        res.sendStatus(500);
+    })
+});
+
+router.get('/single/:id', (req, res) => {
+    const restaurantId = req.params.id;
+    // const userId = req.user.id
+    let queryText = `SELECT "restaurants".id, "restaurants".name, "restaurants".google_places_id, "collections".name AS collection, "collections".id AS collection_id
+                    FROM "restaurants"
+                    JOIN "collections"
+                        ON "collections".id = "restaurants".collection_id
+                    WHERE "restaurants".id = $1;`;
     pool.query(queryText, [restaurantId])
     .then((result)=>{
         res.send(result.rows);
