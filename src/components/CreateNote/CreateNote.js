@@ -5,16 +5,25 @@ import {connect} from 'react-redux';
 
 class CreateNote extends Component {
     state = {
-        newNote: ''
+        newNote: '',
+        restaurantId: this.props.match.params.id
     }
     
     saveNote = ()=>{
         console.log('save button clicked')
         // post collection to DB
+        this.props.dispatch({type: 'ADD_NOTE', payload: this.state});
         this.navBack();
     }
     navBack = ()=>{
         this.props.history.goBack();
+    }
+
+    handleChange = (event)=>{
+      console.log(event.target.value)
+      this.setState({
+        newNote: event.target.value
+      })
     }
     render(){
       return (
@@ -24,7 +33,7 @@ class CreateNote extends Component {
             <label>Note: 
                 <br></br>
                 <textarea className="description" rows="6" type="text" value={this.state.note} 
-                        onChange={(event)=>{this.handleChange('newNote', event)}}></textarea>
+                        onChange={(event)=>{this.handleChange(event)}}></textarea>
             </label>
             <br></br>
             <button onClick={this.saveNote}>SAVE NOTE</button>
