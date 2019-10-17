@@ -65,4 +65,20 @@ router.put('/', (req, res)=> {
         res.sendStatus(500);
     })
 })
+
+router.delete('/:id', (req, res)=> {
+    const noteId = req.params.id;
+    
+    let queryText = `DELETE
+                    FROM "notes"
+                    WHERE "id" = $1;`;
+    pool.query(queryText, [noteId])
+    .then((result)=>{
+        res.sendStatus(200);
+    }).catch((error)=>{
+        console.log('error updating note', error),
+        res.sendStatus(500);
+    })
+})
+
 module.exports = router;

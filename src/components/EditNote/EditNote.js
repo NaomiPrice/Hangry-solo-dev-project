@@ -25,6 +25,11 @@ class EditNote extends Component {
       }
     }
     
+    deleteNote = ()=>{
+      this.props.dispatch({type: 'DELETE_NOTE', payload: this.props.match.params.id})
+      //put in a modal to confirm delete before deleting
+      this.navBack();
+    }
 
     saveNote = ()=>{
         console.log('save button clicked')
@@ -45,7 +50,7 @@ class EditNote extends Component {
                         onChange={(event)=>{this.handleChange(event)}}></textarea>
             </label>
             <br></br>
-            <button>DELETE NOTE</button>
+            <button onClick={this.deleteNote}>DELETE NOTE</button>
             <button onClick={this.saveNote}>SAVE NOTE</button>
         </div>
       );
