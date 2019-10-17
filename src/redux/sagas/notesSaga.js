@@ -19,9 +19,19 @@ function* addNote (action){
     }
 }
 
+function* getOneNote (action){
+    try{
+        const response = yield axios.get(`/api/notes/update/${action.payload}`);
+        yield put({type: 'SET_ONE_NOTE', payload: response.data});
+    }catch(error){
+        console.log('error getting the note you requested', error);
+    }
+}
+
 function* notesSaga() {
     yield takeLatest('GET_NOTES', getNotes);
     yield takeLatest('ADD_NOTE', addNote);
+    yield takeLatest('GET_ONE_NOTE', getOneNote);
   }
   
   export default notesSaga;

@@ -7,5 +7,4 @@ const notesReducer = (state = [], action) => {
     }
   };
   
-  
   export default notesReducer;

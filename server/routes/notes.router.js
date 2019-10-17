@@ -20,6 +20,21 @@ router.get('/:id', (req, res) => {
     })
 });
 
+router.get('/update/:id', (req, res) => {
+    const noteId = req.params.id;
+    let queryText = `SELECT *
+                    FROM "notes"
+                    WHERE "notes".id = $1;`;
+    pool.query(queryText, [noteId])
+    .then((result)=>{
+        console.log(result.rows)
+        res.send(result.rows);
+    }).catch((error)=>{
+        console.log('error getting restaurant data', error),
+        res.sendStatus(500);
+    })
+});
+
 router.post('/', (req, res) => {
     const restaurantId = req.body.restaurantId;
     const userId = req.user.id;

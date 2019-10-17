@@ -4,8 +4,9 @@ import loginMode from './loginModeReducer';
 import user from './userReducer';
 import collections from './collectionReducer';
 import restaurants from './restaurantReducer';
-import singleRestaurant from './singleRestaurantReducer'
-import notes from './notesReducer'
+import singleRestaurant from './singleRestaurantReducer';
+import notes from './notesReducer';
+import singleNote from './singleNoteReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   restaurants,
   singleRestaurant,
   notes,
+  singleNote,
 });
 
 export default rootReducer;

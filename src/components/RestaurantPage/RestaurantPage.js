@@ -25,11 +25,10 @@ class RestaurantPage extends Component {
       this.props.dispatch({type: 'GET_NOTES', payload: this.props.match.params.id});
     }
 
-    componentDidUpdate = (prevProps)=>{
-      if (this.props.reduxState.singleRestaurant !== prevProps.reduxState.singleRestaurant){
-        console.log('component updated!');
-      }
+    editNote = (id)=>{
+      this.props.history.push(`/editNote/${id}`);
     }
+    
     render(){
       const notes = this.props.reduxState.notes.map((note)=>{
         return <div key={note.id} 
