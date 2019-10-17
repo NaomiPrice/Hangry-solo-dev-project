@@ -29,15 +29,23 @@ class CollectionPage extends Component {
   }
   navHome = ()=>{
     this.props.history.push('/home')
+  }
 
+  goToRestaurant=(id)=>{
+    this.props.history.push(`/restaurant/${id}`)
   }
     render(){
+      const restaurants = this.props.reduxState.restaurants.map((restaurant)=>{
+        return <div key={restaurant.id} 
+                    className="restaurantList"
+                    onClick={()=>this.goToRestaurant(restaurant.id)}>{restaurant.name}</div>
+      })
       return (
         <div>
           <button onClick={this.navHome}>HOME</button>
           <h1>{this.state.collectionName}</h1>
           <div>
-            list of restaurants here
+            {restaurants}
           </div>
           <button>TELL ME WHERE TO EAT</button>
         </div>
