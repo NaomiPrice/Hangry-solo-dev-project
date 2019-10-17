@@ -19,6 +19,10 @@ class RestaurantPage extends Component {
       //fire off dispatch to delete restaurant from DB
      console.log('delete button clicked!')
     }
+    componentDidMount = ()=>{
+      this.props.dispatch({type: 'GET_COLLECTIONS'});
+      this.props.dispatch({type: 'GET_SINGLE_RESTAURANT', payload: this.props.match.params.id});
+    }
     render(){
       return (
         <div>
