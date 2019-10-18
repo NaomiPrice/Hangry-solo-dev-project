@@ -12,7 +12,7 @@ function* getNotes (action){
 
 function* addNote (action){
     try{
-        yield axios.post(`/api/notes`, action.payload);
+        yield axios.post(`/api/notes/${action.payload.restaurantId}`, action.payload);
         
     }catch (error){
         console.log('error creating note', error)

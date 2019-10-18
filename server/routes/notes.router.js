@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     const restaurantId = req.params.id;
-    // const userId = req.user.id
+    
     let queryText = `SELECT *
                     FROM "restaurants"
                     JOIN "notes"
@@ -35,8 +35,8 @@ router.get('/update/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-router.post('/', rejectUnauthenticated, (req, res) => {
-    const restaurantId = req.body.restaurantId;
+router.post('/:id', rejectUnauthenticated, (req, res) => {
+    const restaurantId = req.params.id;
     const userId = req.user.id;
     const newNote = req.body.newNote;
     
@@ -54,7 +54,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 router.put('/', rejectUnauthenticated, (req, res)=> {
     const newNote = req.body.newNote;
     const noteId = req.body.noteId;
-    console.log(newNote, noteId);
+    
     let queryText = `UPDATE "notes"
 	                    SET "notes_field" = $1, "date_time_modified" = CURRENT_TIMESTAMP
                     WHERE "notes".id = $2;`;

@@ -10,8 +10,19 @@ function* getRestaurants (action){
     }
 }
 
+function* addRestaurant (action){
+    try{
+        const response = yield axios.post(`/api/restaurant`, action.payload);
+        //use id from restaurant post to send with note post
+        yield axios.post(`/api/notes/${response.data[0].id}`, action.payload);
+    }catch (error){
+        console.log('error adding restaurant', error);
+    }
+}
+
 function* restaurantSaga() {
     yield takeLatest('GET_RESTAURANTS', getRestaurants);
+    yield takeLatest('ADD_RESTAURANT', addRestaurant);
   }
   
   export default restaurantSaga;
