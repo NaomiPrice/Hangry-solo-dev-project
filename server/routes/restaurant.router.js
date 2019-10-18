@@ -1,11 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT *
                     FROM "restaurants"
                     WHERE "user_id" = $1
@@ -21,7 +22,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-router.get('/single/:id', (req, res) => {
+router.get('/single/:id', rejectUnauthenticated, (req, res) => {
     const restaurantId = req.params.id;
     // const userId = req.user.id
     let queryText = `SELECT "restaurants".id, "restaurants".name, "restaurants".google_places_id, "collections".name AS collection, "collections".id AS collection_id

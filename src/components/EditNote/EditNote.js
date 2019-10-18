@@ -9,14 +9,15 @@ class EditNote extends Component {
         noteId: this.props.match.params.id
     }
     handleChange = (event)=>{
-      console.log(event.target.value)
       this.setState({
         newNote: event.target.value
       })
     }
+    
     componentDidMount = ()=>{
       this.props.dispatch({type: 'GET_ONE_NOTE', payload: this.props.match.params.id});
     }
+
     componentDidUpdate = (prevProps)=>{
       if (this.props.reduxState.singleNote !== prevProps.reduxState.singleNote){
         this.setState({
@@ -32,13 +33,14 @@ class EditNote extends Component {
     }
 
     saveNote = ()=>{
-        console.log('save button clicked')
         this.props.dispatch({type: 'UPDATE_NOTE', payload: this.state})
         this.navBack();
     }
+
     navBack = ()=>{
         this.props.history.goBack();
     }
+
     render(){
       return (
         <div>

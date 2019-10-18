@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     const restaurantId = req.params.id;
     // const userId = req.user.id
     let queryText = `SELECT *
@@ -20,7 +21,7 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.get('/update/:id', (req, res) => {
+router.get('/update/:id', rejectUnauthenticated, (req, res) => {
     const noteId = req.params.id;
     let queryText = `SELECT *
                     FROM "notes"
@@ -34,7 +35,7 @@ router.get('/update/:id', (req, res) => {
     })
 });
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const restaurantId = req.body.restaurantId;
     const userId = req.user.id;
     const newNote = req.body.newNote;
@@ -50,7 +51,7 @@ router.post('/', (req, res) => {
     })
 });
 
-router.put('/', (req, res)=> {
+router.put('/', rejectUnauthenticated, (req, res)=> {
     const newNote = req.body.newNote;
     const noteId = req.body.noteId;
     console.log(newNote, noteId);
@@ -66,7 +67,7 @@ router.put('/', (req, res)=> {
     })
 })
 
-router.delete('/:id', (req, res)=> {
+router.delete('/:id', rejectUnauthenticated, (req, res)=> {
     const noteId = req.params.id;
     
     let queryText = `DELETE

@@ -10,17 +10,14 @@ class CreateNote extends Component {
     }
     
     saveNote = ()=>{
-        console.log('save button clicked')
-        // post collection to DB
-        this.props.dispatch({type: 'ADD_NOTE', payload: this.state});
-        this.navBack();
+      this.props.dispatch({type: 'ADD_NOTE', payload: this.state});
+      this.navBack();
     }
     navBack = ()=>{
-        this.props.history.goBack();
+      this.props.history.goBack();
     }
 
     handleChange = (event)=>{
-      console.log(event.target.value)
       this.setState({
         newNote: event.target.value
       })

@@ -8,10 +8,13 @@ class CreateCollection extends Component {
         newCollection: ''
     }
     handleChange = (event)=>{
+      console.log(event.target.value)
       this.setState({
         newCollection: event.target.value
       })
     }
+
+
     saveCollection = ()=>{
         console.log('save button clicked')
         // post collection to DB
