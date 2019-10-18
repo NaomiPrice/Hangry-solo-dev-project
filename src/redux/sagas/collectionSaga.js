@@ -10,8 +10,17 @@ function* getCollection (action){
     }
 }
 
+function* addCollection (action){
+    try{
+        yield axios.post(`/api/collection`, action.payload)
+    }catch (error){
+        console.log('error adding collection for this user', error)
+    }
+}
+
 function* collectionSaga() {
     yield takeLatest('GET_COLLECTIONS', getCollection);
+    yield takeLatest('ADD_COLLECTION', addCollection)
   }
   
   export default collectionSaga;

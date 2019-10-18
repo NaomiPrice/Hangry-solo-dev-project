@@ -14,10 +14,8 @@ class CreateCollection extends Component {
       })
     }
 
-
     saveCollection = ()=>{
-        console.log('save button clicked')
-        // post collection to DB
+        this.props.dispatch({type: 'ADD_COLLECTION', payload: this.state})
         this.navBack();
     }
     navBack = ()=>{

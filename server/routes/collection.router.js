@@ -21,8 +21,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const userId = req.user.id;
+    const newCollection = req.body.newCollection;
+    const queryText = `INSERT INTO "collections" ("name", "user_id")
+                        VALUES ($1, $2);`;
+    pool.query(queryText, [newCollection, userId])
+    .then((result)=>{
+        res.sendStatus(201);
+    }).catch((error)=>{
+        console.log('error creating new collection', error);
+        res.sendStatus(500);
+    })
 });
 
 module.exports = router;
