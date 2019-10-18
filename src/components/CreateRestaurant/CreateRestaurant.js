@@ -6,10 +6,15 @@ import {connect} from 'react-redux';
 class CreateRestaurant extends Component {
     state = {
         name: '',
-        collection: '',
+        collectionId: '',
         note: '',
+        placesId: '',
     }
     
+    componentDidMount = ()=>{
+      this.props.dispatch({type: 'GET_COLLECTIONS'});
+    }
+
     saveRestaurant = ()=>{
         console.log('save button clicked')
         // post collection to DB
@@ -21,7 +26,19 @@ class CreateRestaurant extends Component {
     addCollection = ()=>{
       this.props.history.push('/addCollection')
     }
+
+    handleChange = (propertyName, event)=>{
+      this.setState({
+        [propertyName]: event.target.value
+      })
+    }
+
     render(){
+      const options = this.props.reduxState.collections.map((collection)=>{
+        return <option value={collection.id}
+                        key={collection.id}> {collection.name}</option>
+      })
+
       return (
         <div>
           <button onClick={this.navBack}>BACK</button> 
@@ -33,12 +50,9 @@ class CreateRestaurant extends Component {
               <input id="google-input" className="controls" type="text" size="50" placeholder="Resturant Name"></input>
           </label>
 
-          <select value={this.state.class} onChange={this.handleClassChange}>
-              {/* options will be dynamically generated when collections load */}
-                      <option value="" >--Please choose collection--</option>
-                      <option value="1">Night on the Town</option>
-                      <option value="2">Brunch with Kids</option>
-                      <option value="3">Fast and Clost to Home</option>
+          <select value={this.state.collectionId} onChange={(event)=>{this.handleChange('collectionId', event)}}>
+            <option value="">--Please Select a Collection--</option>
+            {options}
           </select>
 
           <button onClick={this.addCollection}>ADD COLLECTION</button>
@@ -47,7 +61,7 @@ class CreateRestaurant extends Component {
           <label>Note: 
             <br></br>
             <textarea className="description" rows="6" type="text" value={this.state.note} 
-                onChange={(event)=>{this.handleChange('newDescription', event)}}></textarea>
+                onChange={(event)=>{this.handleChange('note', event)}}></textarea>
           </label>
           <br></br>
 
