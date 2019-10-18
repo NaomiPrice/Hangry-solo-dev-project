@@ -42,7 +42,22 @@ router.get('/single/:id', rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const name = req.body.name;
+    const collectionId = req.body.collectionId;
+    const userId = req.user.id;
+    const googleId = req.body.placesId;
+    
+    let queryText = `INSERT INTO "restaurants" ("name", "collection_id", "user_id", "google_places_id")
+                        VALUES ($1, $2, $3, $4)
+                        RETURNING id;`;
+    pool.query(queryText, [name, collectionId, userId, googleId])
+    .then((result)=>{
+        res.send(result.rows)
+    }).catch((error)=>{
+        console.log('error adding restaurant', error);
+        res.sendStatus(500);
+    })
 
 });
 

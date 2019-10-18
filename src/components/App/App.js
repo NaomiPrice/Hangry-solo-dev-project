@@ -21,7 +21,7 @@ import CreateCollection from '../CreateCollection/CreateCollection';
 import CreateRestaurant from '../CreateRestaurant/CreateRestaurant';
 import CreateNote from '../CreateNote/CreateNote';
 import EditNote from '../EditNote/EditNote';
-
+import Script from 'react-load-script';
 import './App.css';
 
 
@@ -32,10 +32,12 @@ class App extends Component {
   }
 
   render() {
+    let urlToUse = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`
     return (
       <Router>
         <div>
           {/* <Nav /> */}
+          <Script url={urlToUse}/>
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
