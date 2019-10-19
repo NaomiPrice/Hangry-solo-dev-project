@@ -8,6 +8,7 @@ class RestaurantPage extends Component {
   state = {
     canEdit: false,
     collectionId: null,
+    collectionName: null,
     restaurantId: this.props.match.params.id,
   }
 
@@ -39,7 +40,8 @@ class RestaurantPage extends Component {
         const restaurant = this.props.reduxState.singleRestaurant;
         //set local state based on Redux state
         this.setState({
-          collectionId: restaurant.collection,
+          collectionId: restaurant.collection_id,
+          collectionName: restaurant.collection,
         })
       }
     }
@@ -51,11 +53,14 @@ class RestaurantPage extends Component {
     }
 
     saveCollection = (event)=>{
+      console.log(event.target.value);
       this.setState({
         canEdit: false,
         collectionId: event.target.value,
+      }, ()=>{
+        this.props.dispatch({type: 'UPDATE_COLLECTION', payload: this.state})
       });
-      this.props.dispatch({type: 'UPDATE_COLLECTION', payload: this.state})
+      
     }
 
     editNote = (id)=>{
@@ -86,7 +91,7 @@ class RestaurantPage extends Component {
                 {options}
               </select>
             </div> :
-            <div onClick={this.editCollection}>{restaurant.collection}</div>
+            <div onClick={this.editCollection}>{this.state.collectionName}</div>
           }
           
           <div>Info coming in from Google</div>

@@ -64,7 +64,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 router.put('/', rejectUnauthenticated, (req, res)=>{
     const restaurantId = req.body.restaurantId;
     const collectionId = req.body.collectionId;
-    let queryText = ``
+    
+    let queryText = `UPDATE "restaurants"
+	                    SET "collection_id" = $1
+                        WHERE "id" = $2;`;
+    pool.query(queryText, [collectionId, restaurantId])
+    .then((result)=>{
+        res.sendStatus(200);
+    }).catch((error)=>{
+        console.log('error updating collection', error);
+    })
 })
 
 router.delete('/:id', rejectUnauthenticated, (req, res)=>{
