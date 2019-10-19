@@ -20,9 +20,18 @@ function* addRestaurant (action){
     }
 }
 
+function* deleteResaurant (action){
+    try{
+        yield axios.delete(`/api/restaurant/${action.payload}`);
+    }catch (error){
+        console.log('error deleting restaurant', error);
+    }
+}
+
 function* restaurantSaga() {
     yield takeLatest('GET_RESTAURANTS', getRestaurants);
     yield takeLatest('ADD_RESTAURANT', addRestaurant);
+    yield takeLatest('DELETE_RESTAURANT', deleteResaurant);
   }
   
   export default restaurantSaga;

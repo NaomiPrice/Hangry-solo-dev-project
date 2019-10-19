@@ -20,7 +20,7 @@ function* addCollection (action){
 
 function* collectionSaga() {
     yield takeLatest('GET_COLLECTIONS', getCollection);
-    yield takeLatest('ADD_COLLECTION', addCollection)
+    yield takeLatest('ADD_COLLECTION', addCollection);
   }
   
   export default collectionSaga;

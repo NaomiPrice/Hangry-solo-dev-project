@@ -28,7 +28,7 @@ CREATE TABLE "notes" (
     "id" SERIAL PRIMARY KEY,
     "notes_field" VARCHAR (500) NOT NULL,
     "user_id" INT REFERENCES "user",
-    "restaurant_id" INT REFERENCES "restaurants",
+    "restaurant_id" INT REFERENCES "restaurants" ON DELETE CASCADE,
     "date_time_created" TIMESTAMP NOT NULL 
     			DEFAULT CURRENT_TIMESTAMP,
     "date_time_modified" TIMESTAMP NOT NULL

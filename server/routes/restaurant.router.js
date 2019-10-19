@@ -61,4 +61,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 });
 
+router.put('/', rejectUnauthenticated, (req, res)=>{
+    const restaurantId = req.body.restaurantId;
+    const collectionId = req.body.collectionId;
+    let queryText = ``
+})
+
+router.delete('/:id', rejectUnauthenticated, (req, res)=>{
+    const restaurantId = req.params.id;
+
+    let queryText = `DELETE 
+                    FROM "restaurants"
+                    WHERE "id" = $1;`;
+    pool.query(queryText, [restaurantId])
+    .then((result)=>{
+        res.sendStatus(200);
+    }).catch((error)=>{
+        console.log('error deleting the restaurant', error);
+    })
+})
+
 module.exports = router;
