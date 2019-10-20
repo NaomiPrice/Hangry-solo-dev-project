@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import GooglePlacesInfo from '../GooglePlacesInfo/GooglePlacesInfo';
 
 
 
@@ -68,6 +69,9 @@ class RestaurantPage extends Component {
     }
     
     render(){
+      if(this.props.reduxState.singleRestaurant.loading){
+        return <div>LOADING...</div>
+      }
       const options = this.props.reduxState.collections.map((collection)=>{
         return <option value={collection.id}
                         key={collection.id}> {collection.name}</option>
@@ -94,8 +98,9 @@ class RestaurantPage extends Component {
             <div onClick={this.editCollection}>{this.state.collectionName}</div>
           }
           
-          <div>Info coming in from Google</div>
-          <div>{notes}</div>
+          <GooglePlacesInfo/>
+          <div>Notes:
+          {notes}</div>
           <button onClick={()=>{this.addNote(restaurant.id)}}>ADD NOTE</button>
         </div>
       );

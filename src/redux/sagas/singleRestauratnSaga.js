@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function* getRestaurant (action){
     try{
+        yield put({type: 'LOADING_RESTAURANT'});
         const response = yield axios.get(`/api/restaurant/single/${action.payload}`);
         yield put({type: 'SET_SINGLE_RESTAURANT', payload: response.data});
     }catch (error){

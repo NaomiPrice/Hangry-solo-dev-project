@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const axios = require('axios');
 
 /**
  * GET route template
@@ -39,9 +40,21 @@ router.get('/single/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-/**
- * POST route template
- */
+router.get('/google/:id', rejectUnauthenticated, (req, res)=>{
+    const placesId = req.params.id;
+    const endpoint = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placesId}&key=${process.env.REACT_APP_API_KEY}`
+
+    axios({
+        method: 'GET',
+        url: endpoint
+    }).then((response)=>{
+        res.send(response.data.result);
+    }).catch((error)=>{
+        console.log('error getting the google info', error)
+        res.sendStatus(500);
+    })
+});
+
 router.post('/', rejectUnauthenticated, (req, res) => {
     const name = req.body.name;
     const collectionId = req.body.collectionId;
