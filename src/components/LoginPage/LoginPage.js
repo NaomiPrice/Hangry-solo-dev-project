@@ -34,9 +34,9 @@ class LoginPage extends Component {
     return (
       <div>
         <h2>Welcome to Hangry! </h2>
-          <p>A place where you can store all the restaurants you 
-          want to try and the tried and true ones you love. Make a quick and easy decision 
-          on where to eat even when you are too hungry to think! Log In here or click 
+          <p>A place you can store all the restaurants you 
+          want to try and the tried and true ones you love. </p> 
+          <p>Log In here or 
           ‘Create an Account’ to get started!</p>
         
         {this.props.errors.loginMessage && (
@@ -76,7 +76,7 @@ class LoginPage extends Component {
               className="log-in"
               type="submit"
               name="submit"
-              value="Log In"
+              value="LOG IN"
             />
           </div>
         </form>

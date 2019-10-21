@@ -1,6 +1,10 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    padding: 15px;
+    background-color: #eeeeee;
+    text-align: center;
+    color: #333333;
 }
 
 .alert {
@@ -9,12 +13,13 @@ body {
 }
 
 form {
-    background-color: #dbd5d5;
+    background-color: whitesmoke;
     width: 30%;
-    height: 250px;
+    height: 200px;
     margin: 20px auto;
-    padding: 25px;
+    padding: 20px 50px;
     border-radius: 2px;
+    border: 1px solid #333333;
 }
 
 /* input {
@@ -48,28 +53,40 @@ form {
     cursor: pointer;
 }
 button{
-    background-color: #99ccc4;
+    background-color: #00562f;
     padding: 15px;
-    border: 1px solid #39403f;
+    border: 1px solid #DDDDDD;
     border-radius: 5px;
     margin: 5px;
     width: 100px;
+    color: #EEEEEE;
 }
 
 .displayCollections{
     width: 300px;
-    border: 1px solid #39403f;
+    border: 1px solid #333333;
     margin: 10px auto 10px auto;
+    background-color: whitesmoke;
 }
 
 input {
-    border: 1px solid #39403f;
+    border: 1px solid #333333;
 }
 
 textarea{
-    border: 1px solid #39403f;
+    border: 1px solid #333333;
 }
 
 select{
-    border: 1px solid #39403f;
+    border: 1px solid #333333;
+}
+.log-in{
+    background-color: #00562f;
+    padding: 10px;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    margin: 4px;
+    width: 80px;
+    color: #EEEEEE;
+
 }
