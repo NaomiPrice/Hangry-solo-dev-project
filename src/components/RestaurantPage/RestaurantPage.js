@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import GooglePlacesInfo from '../GooglePlacesInfo/GooglePlacesInfo';
+import swal from 'sweetalert';
 
 
 
@@ -23,12 +24,31 @@ class RestaurantPage extends Component {
         this.props.history.push(`/collection/${id}`);
     }
     deleteRestaurant = (id)=>{
-      let collectionId = this.props.reduxState.singleRestaurant.collection_id;
-      //confirmation modal before deleting restaurant if yes...
-      //fire off dispatch to delete restaurant from DB
-      this.props.dispatch({type: 'DELETE_RESTAURANT', payload: id});
-      console.log(collectionId);
-      this.goToCollection(collectionId);
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this restaurant and notes!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          let collectionId = this.props.reduxState.singleRestaurant.collection_id;
+          //fire off dispatch to delete restaurant from DB
+          this.props.dispatch({type: 'DELETE_RESTAURANT', payload: id});
+          swal("Poof! Your restaurant has been deleted!", {
+            icon: "success",
+          });
+          this.goToCollection(collectionId);
+        } else {
+          swal("Your restaurant is safe!");
+        }
+      });
+      // let collectionId = this.props.reduxState.singleRestaurant.collection_id;
+      
+      // //fire off dispatch to delete restaurant from DB
+      // this.props.dispatch({type: 'DELETE_RESTAURANT', payload: id});
+      // this.goToCollection(collectionId);
     }
     componentDidMount = ()=>{
       this.props.dispatch({type: 'GET_COLLECTIONS'});
