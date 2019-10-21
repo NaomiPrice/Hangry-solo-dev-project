@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import swal from 'sweetalert';
 
 
 
 class CollectionPage extends Component {
   state = {
-    collectionName: 'not yet'
+    collectionName: 'loading'
   }
   getCollectionName = ()=>{
     let collection = this.props.reduxState.collections
@@ -34,6 +35,17 @@ class CollectionPage extends Component {
   goToRestaurant=(id)=>{
     this.props.history.push(`/restaurant/${id}`)
   }
+
+  decideFood = ()=>{
+    //get the length of the restaurant array in the current collection
+    let arrayLength = this.props.reduxState.restaurants.length;
+    //select a random number between 0 and one less than the length of the array
+    let randomNumber = Math.floor(Math.random() * arrayLength);
+    //grab the name of the restaurant from the array based on the random number
+    let restaurantChoice = this.props.reduxState.restaurants[randomNumber].name;
+    //display the random selection to the user
+    swal("You should eat at:", restaurantChoice);
+  }
     render(){
       const restaurants = this.props.reduxState.restaurants.map((restaurant)=>{
         return <div key={restaurant.id} 
@@ -47,7 +59,7 @@ class CollectionPage extends Component {
           <div>
             {restaurants}
           </div>
-          <button>TELL ME WHERE TO EAT</button>
+          <button onClick={this.decideFood}>TELL ME WHERE TO EAT</button>
         </div>
       );
     }
