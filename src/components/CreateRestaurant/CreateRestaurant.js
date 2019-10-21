@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import swal from 'sweetalert';
 
 
 
@@ -52,6 +53,7 @@ class CreateRestaurant extends Component {
       };
         console.log('save button clicked')
         this.props.dispatch({type: 'ADD_RESTAURANT', payload: this.state})
+        swal("Thank You!", "Your restaurant has been saved!", "success");
         this.navBack();
     }
     navBack = ()=>{
