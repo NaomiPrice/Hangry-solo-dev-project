@@ -70,7 +70,7 @@ input {
 }
 
 
-.log-in, .register{
+.log-in, .register, .commit{
     background-color: #005645;
     padding: 10px;
     border: 1px solid #DDDDDD;

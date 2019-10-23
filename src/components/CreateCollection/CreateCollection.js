@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft} from '@fortawesome/free-solid-svg-icons';
+import './CreateCollection.css';
 
 
 class CreateCollection extends Component {
@@ -24,13 +26,23 @@ class CreateCollection extends Component {
     render(){
       return (
         <div>
-          <button onClick={this.navBack}>BACK</button>  
+          <div className="navDiv">
+            <button className="navBtn"onClick={this.navBack}><FontAwesomeIcon icon={faChevronLeft}/><FontAwesomeIcon icon={faChevronLeft}/> BACK</button>  
+          </div>
+           
+          <div className="pageDiv">
           <h1>Add a new collection</h1>
-          <input placeholder="New Collection" 
-                 value={this.state.newCollection} 
-                 onChange={this.handleChange}></input>
+          <label className="newCollection"> 
+            <br></br>
+            <input placeholder="new collection..." 
+                  value={this.state.newCollection} 
+                  onChange={this.handleChange}></input>
+          </label>
+          
           <br></br>
-          <button onClick={this.saveCollection}>SAVE</button>
+          <button className="commit"onClick={this.saveCollection}>SAVE</button>
+          </div>
+          
         </div>
       );
     }
