@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Raleway&display=swap');
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Raleway', sans-serif;
     margin: 0px;
-    padding: 15px;
+    /* padding: 15px; */
     background-color: #eeeeee;
-    text-align: center;
+    /* text-align: center; */
     color: #333333;
+    height: 100%;
+}
+
+h1, h2,  h3{
+    font-family: 'Abril Fatface', cursive;
+    margin-bottom: 10px;
 }
 
 .alert {
@@ -13,47 +21,34 @@ body {
 }
 
 form {
-    background-color: whitesmoke;
-    width: 30%;
-    height: 200px;
-    margin: 20px auto;
-    padding: 20px 50px;
-    border-radius: 2px;
-    border: 1px solid #333333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }
 
-/* input {
-    margin: 5px;
-    margin-bottom: 10px;
-}
 
-.log-in, .log-out, .register {
-  background-color: #00acb0;
-  border-radius: 4px;
-  color: #f8f8f8;
-  min-height: 50px;
-  min-width: 100px;
-  outline:0;
-  cursor: pointer;
-}
-
-.log-in:hover, .log-out:hover, .register:hover {
+/* .log-in:hover, .log-out:hover, .register:hover {
   background-color: #008183;
-} */
+}  */
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
     background:none;
-    color:inherit;
+    color:#C68642;
     border:none;
     padding:0;
     font: inherit;
     outline:0;
-    border-bottom:1px solid #444; 
+    border-bottom:1px solid #C68642; 
+    border-radius: 0;
+    padding-bottom: 5px;
     cursor: pointer;
+    width: 150px;
+    
 }
 button{
-    background-color: #00562f;
+    background-color: #005645;
     padding: 15px;
     border: 1px solid #DDDDDD;
     border-radius: 5px;
@@ -62,31 +57,66 @@ button{
     color: #EEEEEE;
 }
 
-.displayCollections{
-    width: 300px;
-    border: 1px solid #333333;
-    margin: 10px auto 10px auto;
-    background-color: whitesmoke;
-}
 
 input {
-    border: 1px solid #333333;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid #C68642;
+    width: 100%;
+    font-size: 22px;
+    line-height: 1.2;
+    padding: 0 2px;
 }
 
-textarea{
-    border: 1px solid #333333;
-}
 
-select{
-    border: 1px solid #333333;
-}
-.log-in{
-    background-color: #00562f;
+.log-in, .register{
+    background-color: #005645;
     padding: 10px;
     border: 1px solid #DDDDDD;
     border-radius: 5px;
-    margin: 4px;
-    width: 80px;
     color: #EEEEEE;
+    font-size: 15px;
+    width: 300px;
+    margin: 10px;
+}
 
+.navBtn{
+    background-color: #eeeeee;
+    color: #005645;
+    padding: 10px 5px;
+    width: 80px;
+    margin-left: 20px;
+}
+
+.titleDescription{
+    width: 250px;
+    text-align: center;
+}
+
+.pageDiv{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    padding: 10px 15px 80px 15px;
+    margin-top: 50px;
+}
+
+.logInInfo{
+    margin: 10px;
+    padding: 5px;
+}
+.navDiv{
+    height: 70px;
+    width: 100%;
+    background-color: #005645;
+    position: sticky;
+    margin-bottom: -50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
 }

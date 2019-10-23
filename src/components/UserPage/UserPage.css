@@ -1,0 +1,39 @@
+
+.addButtons{
+    display: flex;
+    justify-content: space-between;
+}
+.addBtn{
+    width: 150px;
+    padding: 15px;
+}
+
+.displayCollections{
+    width: 300px;
+    /* border: 1px solid #333333; */
+    margin: 10px auto 10px auto;
+    background-color: whitesmoke;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.collection{
+    height: 40px;
+    width: 275px;
+    color: #C68642;
+    border: 1px solid #c6c6c6; 
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.collectionP{
+    font-family: 'Abril Fatface', cursive;
+    font-size: 25px;
+    margin-left: 10px;
+    margin-top: 10px;
+    align-self: center;
+
+}

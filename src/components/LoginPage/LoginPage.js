@@ -32,12 +32,14 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Welcome to Hangry! </h2>
-          <p>A place you can store all the restaurants you 
-          want to try and the tried and true ones you love. </p> 
-          <p>Log In here or 
+      <div className="pageDiv">
+        <h1 className="title">Welcome to Hangry! </h1>
+        <div className="titleDescription">
+        <p>Serving up restaurants when you need them most.
+          Log In here or 
           ‘Create an Account’ to get started!</p>
+        </div>
+    
         
         {this.props.errors.loginMessage && (
           <h2
@@ -48,24 +50,26 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
+          <h2>Login</h2>
+          <div className="logInInfo">
             <label htmlFor="username">
               Username:
               <input
                 type="text"
                 name="username"
+                placeholder="username..."
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
             </label>
           </div>
-          <div>
+          <div className="logInInfo">
             <label htmlFor="password">
               Password:
               <input
                 type="password"
                 name="password"
+                placeholder="password..."
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
@@ -80,7 +84,7 @@ class LoginPage extends Component {
             />
           </div>
         </form>
-        <p>or</p>
+        <h2>or</h2>
         <center>
           <button
             type="button"

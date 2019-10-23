@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import './UserPage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
@@ -29,19 +32,26 @@ class UserPage extends Component {
     })
     return(
     <div>
-      <LogOutButton className="log-in" />
-      <h1 id="welcome">
-        Welcome, { this.props.reduxState.user.firstName }!
-      </h1>
-  
-      <button onClick={this.addCollection}>ADD COLLECTION</button>
-      <button onClick={this.addRestaurant}>ADD RESTAURANT</button>
-      <p>Collections:</p>
-      <div className="displayCollections">
-        { this.props.reduxState.collections[0] ? 
-          <div>{collections}</div> : 
-          <div>No collections yet...please add one!</div>
-        }
+      <div className="navDiv">
+        <LogOutButton className="navBtn" />
+      </div>  
+      <div className="pageDiv">
+        <h1 id="welcome">
+          Welcome, { this.props.reduxState.user.firstName }!
+        </h1>
+        <div className="addButtons">
+          <button className="addBtn" onClick={this.addCollection}><FontAwesomeIcon icon={faPlusCircle}/> ADD COLLECTION</button>
+          <button className="addBtn" onClick={this.addRestaurant}><FontAwesomeIcon icon={faPlusCircle}/> ADD RESTAURANT</button>
+        </div>
+        
+        
+        <div className="displayCollections">
+          <p className="collectionP">Collections:</p>
+          { this.props.reduxState.collections[0] ? 
+            <div>{collections}</div> : 
+            <div className="collection">No collections yet...please add one!</div>
+          }
+        </div>
       </div>
     </div>
     )

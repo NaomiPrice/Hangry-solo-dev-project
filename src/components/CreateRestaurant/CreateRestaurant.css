@@ -1,0 +1,27 @@
+.addRestText{
+    margin-bottom: 30px
+}
+
+.collectionSelect{
+    margin-top: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+select{
+    border: 1px solid #333333;
+    height: 30px;
+    width: 180px;
+    text-align: center;
+    color: #c68642;
+}
+
+textarea{
+    border: 1px solid #333333;
+    border-radius: 5px;
+    width: 300px;
+    font-size: 15px;
+    padding: 0;
+}

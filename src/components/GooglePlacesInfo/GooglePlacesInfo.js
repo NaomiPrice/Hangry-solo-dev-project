@@ -33,11 +33,6 @@ class GooglePlcesInfo extends Component {
         })
     }
 
-    componentDidMount = ()=>{
-        this.getGoogleData();
-        this.geolocate();
-    }
-
     geolocate = ()=> {
         //get geolocation as supplied by brwoser's navigator.geolocation object
         if (navigator.geolocation) {
@@ -53,7 +48,7 @@ class GooglePlcesInfo extends Component {
 
     getMyDistance = (lat1, lon1, lat2, lon2, unit)=> {
         if(!lat1 || !lon1 || !lat2 || !lon2){
-            return 0;
+            return '--';
         }
         //calculate distance distance between two points with latitudet and longitude
         const radlat1 = Math.PI * lat1/180
@@ -84,6 +79,11 @@ class GooglePlcesInfo extends Component {
             default:
                 return '--'
         }
+    }
+
+    componentDidMount = ()=>{
+        this.getGoogleData();
+        this.geolocate();
     }
 
     render(){

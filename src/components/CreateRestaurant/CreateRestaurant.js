@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import swal from 'sweetalert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import './CreateRestaurant.css'
 
 
 
@@ -77,31 +80,35 @@ class CreateRestaurant extends Component {
 
       return (
         <div>
-          <button onClick={this.navBack}>BACK</button> 
+          <div className="navDiv">
+            <button  className="navBtn" onClick={this.navBack}><FontAwesomeIcon icon={faChevronLeft}/><FontAwesomeIcon icon={faChevronLeft}/> BACK</button>
+          </div>
+          <div className="pageDiv">
+            <h1 className="addRestText">Add a restaurant to your list...</h1>
 
-          <h1>Add a Restaurant to your List</h1>
+            <label>Restaurant Name:
+                <br></br>
+                <input id="google-input" className="controls" type="text" size="50" placeholder="resturant name..."></input>
+            </label>
+            <div className="collectionSelect">
+              <select value={this.state.collectionId} onChange={(event)=>{this.handleChange('collectionId', event)}}>
+                <option value="">--Select a Collection--</option>
+                {options}
+              </select>
 
-          <label>Restaurant Name:
-              <br></br>
-              <input id="google-input" className="controls" type="text" size="50" placeholder="Resturant Name"></input>
-          </label>
-
-          <select value={this.state.collectionId} onChange={(event)=>{this.handleChange('collectionId', event)}}>
-            <option value="">--Select a Collection--</option>
-            {options}
-          </select>
-
-          <button onClick={this.addCollection}>ADD COLLECTION</button>
-          <br></br>
-
-          <label>Note: 
+              <button onClick={this.addCollection}><FontAwesomeIcon icon={faPlusCircle}/> ADD NEW COLLECTION</button>
+            </div>
+            
             <br></br>
-            <textarea className="description" rows="6" type="text" value={this.state.note} 
-                onChange={(event)=>{this.handleChange('newNote', event)}}></textarea>
-          </label>
-          <br></br>
 
-          <button onClick={this.saveRestaurant}>SAVE</button>
+            <label>Leave a Note: 
+              <br></br>
+              <textarea className="description" rows="6" type="text" value={this.state.note} 
+                  onChange={(event)=>{this.handleChange('newNote', event)}}></textarea>
+            </label>
+           
+            <button className="log-in"onClick={this.saveRestaurant}>SAVE</button>
+          </div>
         </div>
       );
     }

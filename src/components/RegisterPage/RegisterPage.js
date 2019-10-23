@@ -33,7 +33,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="pageDiv">
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -49,34 +49,41 @@ class RegisterPage extends Component {
           >
             Back to login page
           </button>
-        <form onSubmit={this.registerUser}>
+          <div className="titleDescription">
           <p>Create an account to start collecting your restaurants.</p>
-          <div>
-          <label htmlFor="firstName">
-              First Name:
-              <input
-                type="text"
-                name="firstName"
-                value={this.state.firstName}
-                onChange={this.handleInputChangeFor('firstName')}
-              />
-            </label>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
           </div>
-          <div>
+        <form onSubmit={this.registerUser}>
+          <div className="logInInfo">
+            <label htmlFor="firstName">
+                First Name:
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="first name..."
+                  value={this.state.firstName}
+                  onChange={this.handleInputChangeFor('firstName')}
+                />
+              </label>
+            </div>
+            <div className="logInInfo">
+              <label htmlFor="username">
+                Username:
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="username..."
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor('username')}
+                />
+              </label>
+          </div>
+          <div className="logInInfo">
             <label htmlFor="password">
               Password:
               <input
                 type="password"
                 name="password"
+                placeholder="password..."
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
