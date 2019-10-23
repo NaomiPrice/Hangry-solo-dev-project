@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import swal from 'sweetalert';
+import './CollectionPage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -54,12 +57,18 @@ class CollectionPage extends Component {
       })
       return (
         <div>
-          <button onClick={this.navHome}>HOME</button>
-          <h1>{this.state.collectionName}</h1>
-          <div>
-            {restaurants}
+          <div className="navDiv">
+            <button className="navBtn"onClick={this.navHome}><FontAwesomeIcon icon={faHome}/> HOME</button>
           </div>
-          <button onClick={this.decideFood}>TELL ME WHERE TO EAT</button>
+          
+          <div className="pageDiv">
+            <h1 className="headline">{this.state.collectionName}</h1>
+            <div className="displayRestaurants">
+              {restaurants}
+            </div>
+            <button className="commit" onClick={this.decideFood}>TELL ME WHERE TO EAT</button>
+          </div>
+        
         </div>
       );
     }
