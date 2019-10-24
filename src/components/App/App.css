@@ -27,20 +27,15 @@ form {
     
 }
 
-
-/* .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #008183;
-}  */
-
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
     background:none;
-    color:#C68642;
+    color:#9c7270;
     border:none;
     padding:0;
     font: inherit;
     outline:0;
-    border-bottom:1px solid #C68642; 
+    border-bottom:1px solid #9c7270; 
     border-radius: 0;
     padding-bottom: 5px;
     cursor: pointer;
@@ -62,11 +57,16 @@ input {
     border: none;
     outline: none;
     background: transparent;
-    border-bottom: 2px solid #C68642;
+    border-bottom: 2px solid #9c7270;
     width: 100%;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.2;
     padding: 0 2px;
+}
+
+label{
+    font-size: 18px;
+    font-weight: 900;
 }
 
 .log-in, .register, .commit{

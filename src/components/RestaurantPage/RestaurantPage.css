@@ -1,5 +1,5 @@
 .note{
-    color: #C68642;
+    color: #9c7270;
     height: 40px;
     width: 280px;
     border: 1px solid #c6c6c6; 
@@ -15,17 +15,20 @@
     margin: 5px;
 }
 .displayCollectionName{
-    color: #C68642;
+    color: #9c7270;
     font-size: 17px;
     margin: 10px;
 }
 
 .googleData{
-    width: 280px;
+    width: 285px;
     margin: 10px;
-    border: 1px solid #c6c6c6;
-    padding: 5px 7px 2px 7px;
+    border: 1px solid #eeeeee;
+    padding: 5px 10px 2px 10px;
     color: #005645;
+    /* background-color: #cedad8; */
+    background-color: #e7cfce8e;
+    border-radius: 5px;
 }
 
 .detailDiv{
@@ -39,4 +42,6 @@
 
 .noteName p{
     margin: 16px 0px 16px 10px;
+    font-size: 18px;
+    font-weight: 900;
 }
