@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -25,15 +27,20 @@ class CreateNote extends Component {
     render(){
       return (
         <div>
-            <button onClick={this.navBack}>CANCEL</button>  
+          <div className="navDiv">
+            <button className="navBtn" onClick={this.navBack}><FontAwesomeIcon icon={faChevronLeft}/><FontAwesomeIcon icon={faChevronLeft}/> CANCEL</button>  
+          </div> 
+          <div className="pageDiv">
             <h1>Add a Note</h1>
-            <label>Note: 
+            <label> Note:
                 <br></br>
-                <textarea className="description" rows="6" type="text" value={this.state.note} 
-                        onChange={(event)=>{this.handleChange(event)}}></textarea>
+                <textarea className="description" rows="6" type="text" 
+                value={this.state.note} placeholder="add a new note"
+                onChange={(event)=>{this.handleChange(event)}}></textarea>
             </label>
             <br></br>
-            <button onClick={this.saveNote}>SAVE NOTE</button>
+            <button className="commit" onClick={this.saveNote}>SAVE NOTE</button>
+          </div>
         </div>
       );
     }

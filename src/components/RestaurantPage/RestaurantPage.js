@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import GooglePlacesInfo from '../GooglePlacesInfo/GooglePlacesInfo';
 import swal from 'sweetalert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle, faPencilAlt, faTrashAlt, faChevronLeft, faHome } from '@fortawesome/free-solid-svg-icons';
+import './RestaurantPage.css';
 
 
 
@@ -99,29 +102,39 @@ class RestaurantPage extends Component {
       const notes = this.props.reduxState.notes.map((note)=>{
         return <div key={note.id} 
                     className="note"
-                    onClick={()=>this.editNote(note.id)}>{note.notes_field}</div>
+                    onClick={()=>this.editNote(note.id)}>{note.notes_field}
+                    <div className="edit"><FontAwesomeIcon icon={faPencilAlt}/></div>
+                </div>
       })
       const restaurant = this.props.reduxState.singleRestaurant;
+
       return (
         <div>
-          <button onClick={()=>{this.goToCollection(restaurant.collection_id)}}>COLLECTION LIST</button>  
-          <button onClick={()=>{this.deleteRestaurant(restaurant.id)}}>DELETE RESTAURANT</button>
-          <button onClick={this.navHome}>HOME</button>
-      
-          <h1>{restaurant.name}</h1>
-          {this.state.canEdit ?
-            <div>
-              <select value={this.state.collectionId} onChange={(event)=>{this.saveCollection(event)}}>
-                {options}
-              </select>
-            </div> :
-            <div onClick={this.editCollection}>{this.state.collectionName}</div>
-          }
+          <div className="navDiv">
+            <button className="navBtn" onClick={()=>{this.goToCollection(restaurant.collection_id)}}><FontAwesomeIcon icon={faChevronLeft}/><FontAwesomeIcon icon={faChevronLeft}/> LIST</button>  
+            <button className="navBtn" onClick={()=>{this.deleteRestaurant(restaurant.id)}}><FontAwesomeIcon icon={faTrashAlt}/> DELETE</button>
+            <button className="navBtn" onClick={this.navHome}><FontAwesomeIcon icon={faHome}/> HOME</button>
+          </div>
           
-          <GooglePlacesInfo/>
-          <div>Notes:
-          {notes}</div>
-          <button onClick={()=>{this.addNote(restaurant.id)}}>ADD NOTE</button>
+          <div className="pageDiv">
+            <h1 className="headline" >{restaurant.name}</h1>
+            {this.state.canEdit ?
+              <div>
+                <select value={this.state.collectionId} onChange={(event)=>{this.saveCollection(event)}}>
+                  {options}
+                </select>
+              </div> :
+              <div className="displayCollectionName" onClick={this.editCollection}>{this.state.collectionName} <FontAwesomeIcon icon={faPencilAlt}/></div>
+            }
+            
+            <GooglePlacesInfo/>
+            <div className="noteName">
+              <p>Notes:</p>
+            {notes}</div>
+            <button className="commit" onClick={()=>{this.addNote(restaurant.id)}}><FontAwesomeIcon icon={faPlusCircle}/> ADD NOTE</button>
+          </div>
+      
+          
         </div>
       );
     }

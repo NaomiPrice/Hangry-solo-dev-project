@@ -15,6 +15,7 @@ class GooglePlcesInfo extends Component {
         if(this.state.loading || this.state.response){
             return
         }
+        //begin by changing local loading state to ture to indicate loading has begun
         this.setState({
             loading: true,
         })
@@ -25,6 +26,8 @@ class GooglePlcesInfo extends Component {
         }).then((response)=>{
             console.log(response.data);
             this.setState({
+                //when Google data gets back, set local loading state back to false 
+                //and fill response with data frojm Google
                 loading: false,
                 response: response.data,
             })
@@ -48,7 +51,7 @@ class GooglePlcesInfo extends Component {
 
     getMyDistance = (lat1, lon1, lat2, lon2, unit)=> {
         if(!lat1 || !lon1 || !lat2 || !lon2){
-            return '--';
+            return '0';
         }
         //calculate distance distance between two points with latitudet and longitude
         const radlat1 = Math.PI * lat1/180
@@ -88,18 +91,24 @@ class GooglePlcesInfo extends Component {
 
     render(){
         if(this.state.loading || !this.state.response){
-           return <p>loading</p>
+           return <p>loading...</p>
         }
         let placeLat = this.state.response.geometry.location.lat;
         let placeLng = this.state.response.geometry.location.lng;
         const distance = this.getMyDistance(placeLat, placeLng, this.state.userLat, this.state.userLng, "M")
-
+        let address = this.state.response.address_components;
         return(
             
            <div className="googleData">
-               <p>Address: {this.state.response.formatted_address}</p>
-               <p>Distance from current location: {Math.round(distance * 100)/100} miles</p>
-               <p>Price Level: {this.displayPriceLevel()}</p>
+               <div className="addressDiv">
+                <p>{address[0].short_name} {address[1].short_name},</p>
+                <p>{address[2].short_name}, {address[4].short_name} {address[6].short_name}</p>
+               </div>
+               <div className="detailDiv">
+                <p>{this.displayPriceLevel()}</p>
+                <p>{Math.round(distance * 10)/10} miles away</p>
+               </div>
+            
            </div>
         )
     }

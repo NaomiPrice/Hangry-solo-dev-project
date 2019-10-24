@@ -69,7 +69,6 @@ input {
     padding: 0 2px;
 }
 
-
 .log-in, .register, .commit{
     background-color: #005645;
     padding: 10px;
@@ -86,7 +85,7 @@ input {
     color: #005645;
     padding: 10px 5px;
     width: 80px;
-    margin-left: 20px;
+    margin: 5px 20px 5px 20px;
 }
 
 .titleDescription{
