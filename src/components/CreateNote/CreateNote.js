@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import swal from 'sweetalert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 
@@ -12,18 +13,27 @@ class CreateNote extends Component {
     }
     
     saveNote = ()=>{
+      //if new note has not been created, return message for user
+      if(this.state.newNote ===''){
+        return swal("Plese enter a note or cancel");
+      }
+      //if note has been created, dispatch Saga to send to DataBase
       this.props.dispatch({type: 'ADD_NOTE', payload: this.state});
+      //send user back to previous restaurant page
       this.navBack();
     }
+
     navBack = ()=>{
       this.props.history.goBack();
     }
 
     handleChange = (event)=>{
+      //sets local newNote state to user's input
       this.setState({
         newNote: event.target.value
       })
     }
+
     render(){
       return (
         <div>
@@ -46,8 +56,4 @@ class CreateNote extends Component {
     }
 } 
 
-const putReduxStateOnProps = (reduxState) => ({
-  reduxState
-})
-
-export default connect(putReduxStateOnProps)(CreateNote);
+export default connect()(CreateNote);
