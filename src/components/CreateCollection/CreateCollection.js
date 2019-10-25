@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import swal from 'sweetalert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 import './CreateCollection.css';
@@ -9,20 +10,28 @@ class CreateCollection extends Component {
     state = {
         newCollection: ''
     }
+
     handleChange = (event)=>{
-      console.log(event.target.value)
+      //set state to what user types in input
       this.setState({
         newCollection: event.target.value
       })
     }
 
     saveCollection = ()=>{
-        this.props.dispatch({type: 'ADD_COLLECTION', payload: this.state})
-        this.navBack();
+      if(this.state.newCollection ===''){
+        return swal("Plese enter a collection name or select 'back' to cancel");
+      }
+      //when save button is clicked. send new collection to post in DB
+      this.props.dispatch({type: 'ADD_COLLECTION', payload: this.state})
+      //navagate user back to previous page(could be home page or create restaurant page)
+      this.navBack();
     }
+
     navBack = ()=>{
         this.props.history.goBack();
     }
+
     render(){
       return (
         <div>
@@ -31,16 +40,16 @@ class CreateCollection extends Component {
           </div>
            
           <div className="pageDiv">
-          <h1>Add a new collection</h1>
-          <label className="newCollection"> 
+            <h1>Add a new collection</h1>
+            <label className="newCollection"> 
+              <br></br>
+              <input placeholder="new collection..." 
+                    value={this.state.newCollection} 
+                    onChange={this.handleChange}></input>
+            </label>
+            
             <br></br>
-            <input placeholder="new collection..." 
-                  value={this.state.newCollection} 
-                  onChange={this.handleChange}></input>
-          </label>
-          
-          <br></br>
-          <button className="commit"onClick={this.saveCollection}>SAVE</button>
+            <button className="commit"onClick={this.saveCollection}>SAVE</button>
           </div>
           
         </div>
@@ -48,8 +57,5 @@ class CreateCollection extends Component {
     }
 } 
 
-const putReduxStateOnProps = (reduxState) => ({
-  reduxState
-})
 
-export default connect(putReduxStateOnProps)(CreateCollection);
+export default connect()(CreateCollection);

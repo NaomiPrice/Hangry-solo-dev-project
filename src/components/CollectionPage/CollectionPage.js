@@ -13,6 +13,9 @@ class CollectionPage extends Component {
   }
   getCollectionName = ()=>{
     let collection = this.props.reduxState.collections
+    //loop through each collection in user's list - if collection id matches
+    //the id of the collection that was clicked on when the user got to the page (passed through url params)
+    //that collection name will be set to local state. 
     collection.forEach((item)=>{
       if (item.id === Number(this.props.match.params.id)){
         this.setState({
@@ -22,11 +25,14 @@ class CollectionPage extends Component {
     }) 
   }
   componentDidMount = ()=>{
+    //get all collections for current user
     this.props.dispatch({type: 'GET_COLLECTIONS'});
+    //get all restaurants that are a part of current collection as determined by param passed by url
     this.props.dispatch({type: 'GET_RESTAURANTS', payload: this.props.match.params.id});
   }
 
   componentDidUpdate = (prevProps)=>{
+    //when Redux state has loaded with data, get the collection name and set to local state
     if (this.props.reduxState.collections !== prevProps.reduxState.collections){
       this.getCollectionName();
     }
@@ -49,29 +55,31 @@ class CollectionPage extends Component {
     //display the random selection to the user
     swal("You should eat at:", restaurantChoice);
   }
-    render(){
-      const restaurants = this.props.reduxState.restaurants.map((restaurant)=>{
-        return <div key={restaurant.id} 
-                    className="restaurantList"
-                    onClick={()=>this.goToRestaurant(restaurant.id)}>{restaurant.name}</div>
-      })
-      return (
-        <div>
-          <div className="navDiv">
-            <button className="navBtn"onClick={this.navHome}><FontAwesomeIcon icon={faHome}/> HOME</button>
-          </div>
-          
-          <div className="pageDiv">
-            <h1 className="headline">{this.state.collectionName}</h1>
-            <div className="displayRestaurants">
-              {restaurants}
-            </div>
-            <button className="commit" onClick={this.decideFood}>TELL ME WHERE TO EAT</button>
-          </div>
-        
+
+  render(){
+    //map through list of restaurants to display to DOM
+    const restaurants = this.props.reduxState.restaurants.map((restaurant)=>{
+      return <div key={restaurant.id} 
+                  className="restaurantList"
+                  onClick={()=>this.goToRestaurant(restaurant.id)}>{restaurant.name}</div>
+    })
+    return (
+      <div>
+        <div className="navDiv">
+          <button className="navBtn"onClick={this.navHome}><FontAwesomeIcon icon={faHome}/> HOME</button>
         </div>
-      );
-    }
+        
+        <div className="pageDiv">
+          <h1 className="headline">{this.state.collectionName}</h1>
+          <div className="displayRestaurants">
+            {restaurants}
+          </div>
+          <button className="commit" onClick={this.decideFood}>TELL ME WHERE TO EAT</button>
+        </div>
+      
+      </div>
+    );
+  }
 } 
 
 const putReduxStateOnProps = (reduxState) => ({

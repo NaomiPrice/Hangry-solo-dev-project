@@ -7,8 +7,6 @@ import {
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
-
-// import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
@@ -35,7 +33,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {/* <Nav /> */}
           <Script url={urlToUse}/>
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
