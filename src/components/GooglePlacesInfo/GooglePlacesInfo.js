@@ -50,6 +50,7 @@ class GooglePlcesInfo extends Component {
     }
 
     getMyDistance = (lat1, lon1, lat2, lon2, unit)=> {
+        //if all values are not yet accessible, return 0 
         if(!lat1 || !lon1 || !lat2 || !lon2){
             return '0';
         }
@@ -68,6 +69,7 @@ class GooglePlcesInfo extends Component {
     }
 
     displayPriceLevel = ()=>{
+        //convert Google price level into symbols to display
         switch(this.state.response.price_level){
             case 1:
                 return '$'
@@ -85,16 +87,20 @@ class GooglePlcesInfo extends Component {
     }
 
     componentDidMount = ()=>{
+        //GET restaurant data from Google
         this.getGoogleData();
+        //GET user divice longitude and latitude
         this.geolocate();
     }
 
     render(){
+        //if the local state is loading or the local state 'response' is not filled - return 'loading'
         if(this.state.loading || !this.state.response){
            return <p>loading...</p>
         }
         let placeLat = this.state.response.geometry.location.lat;
         let placeLng = this.state.response.geometry.location.lng;
+        //run distance between user and restaurant calculation
         const distance = this.getMyDistance(placeLat, placeLng, this.state.userLat, this.state.userLng, "M")
         let address = this.state.response.address_components;
         return(
