@@ -4,18 +4,29 @@
 
 .collectionSelect{
     margin-top: 20px;
-    width: 300px;
+    width: 285px;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px 10px 5px 10px;
+}
+
+.addCollectionBtn{
+    font-size: 30px;
+    color: #005645;
+    background-color: #eeeeee;
+    border: none;
+    width: 50px;
+    margin-left: 15px;
 }
 
 select{
     border: 1px solid #333333;
     height: 30px;
-    width: 180px;
+    width: 190px;
     text-align: center;
     color: #9c7270;
+    font-size: 16px;
 }
 
 textarea{

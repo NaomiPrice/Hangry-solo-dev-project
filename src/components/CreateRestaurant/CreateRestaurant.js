@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import './CreateRestaurant.css'
 
-
-
 class CreateRestaurant extends Component {
     state = {
         name: '',
@@ -16,7 +14,9 @@ class CreateRestaurant extends Component {
     }
     
     componentDidMount = ()=>{
+      //GET collections for current user from DataBase
       this.props.dispatch({type: 'GET_COLLECTIONS'});
+      //attaches Google Autocomplete to input field created
       this.handleScriptLoad();
     }
 
@@ -39,8 +39,7 @@ class CreateRestaurant extends Component {
   placeChangeHandler = ()=>{
     //get data on the place google search identified
     let thePlace = this.autocomplete.getPlace();
-    console.log(thePlace);
-
+    //sets Name and placesID from Google search to local state 
     this.setState({
         name: thePlace.name,
         placesId: thePlace.place_id,
@@ -51,17 +50,22 @@ class CreateRestaurant extends Component {
       let name = this.state.name;
       let note = this.state.note;
       let collection = this.state.collectionId;
+      //if all fields are not filled out, alert user
       if(name === '' || note === '' || collection === ''){
-        return alert('please fill out all fields')
+        return swal("Plese fill out all fields or select 'back' to cancel");
       };
-        console.log('save button clicked')
-        this.props.dispatch({type: 'ADD_RESTAURANT', payload: this.state})
-        swal("Thank You!", "Your restaurant has been saved!", "success");
-        this.navBack();
+      //if fields are filled out, dispatch data to Saga to be added to DataBase 
+      this.props.dispatch({type: 'ADD_RESTAURANT', payload: this.state});
+      //alert user of successful save
+      swal("Thank You!", "Your restaurant has been saved!", "success");
+      //send user back to previous page
+      this.navBack();
     }
+
     navBack = ()=>{
         this.props.history.goBack();
     }
+
     addCollection = ()=>{
       this.props.history.push('/addCollection')
     }
@@ -73,6 +77,7 @@ class CreateRestaurant extends Component {
     }
 
     render(){
+      //map through collections for user to populate 
       const options = this.props.reduxState.collections.map((collection)=>{
         return <option value={collection.id}
                         key={collection.id}> {collection.name}</option>
@@ -96,7 +101,7 @@ class CreateRestaurant extends Component {
                 {options}
               </select>
 
-              <button onClick={this.addCollection}><FontAwesomeIcon icon={faPlusCircle}/> ADD NEW COLLECTION</button>
+              <button className="addCollectionBtn" onClick={this.addCollection}><FontAwesomeIcon icon={faPlusCircle}/></button>
             </div>
             
             <br></br>
