@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import swal from 'sweetalert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faTrashAlt, faCheck} from '@fortawesome/free-solid-svg-icons';
 import './EditNote.css';
@@ -10,17 +11,21 @@ class EditNote extends Component {
         newNote: '',
         noteId: this.props.match.params.id
     }
+
     handleChange = (event)=>{
+      //update local state with user input
       this.setState({
         newNote: event.target.value
       })
     }
     
     componentDidMount = ()=>{
+      //when page loads, get note data associated with current note
       this.props.dispatch({type: 'GET_ONE_NOTE', payload: this.props.match.params.id});
     }
 
     componentDidUpdate = (prevProps)=>{
+      //when redux loads with note data, set local state to current note from DataBase
       if (this.props.reduxState.singleNote !== prevProps.reduxState.singleNote){
         this.setState({
           newNote: this.props.reduxState.singleNote.notes_field
@@ -29,13 +34,32 @@ class EditNote extends Component {
     }
     
     deleteNote = ()=>{
-      this.props.dispatch({type: 'DELETE_NOTE', payload: this.props.match.params.id})
-      //put in a modal to confirm delete before deleting
-      this.navBack();
+      //before deleting confirm delete with user
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover your note!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Poof! Your note has been deleted!", {
+            icon: "success",
+          });
+          //delete note if confirmed
+          this.props.dispatch({type: 'DELETE_NOTE', payload: this.props.match.params.id})
+          this.navBack();
+        } else {
+          swal("Your note is safe!");
+        }
+      });
     }
 
     saveNote = ()=>{
+        //dispatch Saga to update note in DataBase
         this.props.dispatch({type: 'UPDATE_NOTE', payload: this.state})
+        //navagate user back to previous page where they can see updated note
         this.navBack();
     }
 
