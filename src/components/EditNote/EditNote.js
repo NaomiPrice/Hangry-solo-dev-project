@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faTrashAlt, faCheck} from '@fortawesome/free-solid-svg-icons';
 import './EditNote.css';
@@ -35,25 +35,27 @@ class EditNote extends Component {
     
     deleteNote = ()=>{
       //before deleting confirm delete with user
-      swal({
-        title: "Are you sure?",
+      Swal.fire({
+        title: 'Are you sure?',
         text: "Once deleted, you will not be able to recover your note!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Poof! Your note has been deleted!", {
-            icon: "success",
-          });
-          //delete note if confirmed
-          this.props.dispatch({type: 'DELETE_NOTE', payload: this.props.match.params.id})
-          this.navBack();
-        } else {
-          swal("Your note is safe!");
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#005645',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Your file has been deleted.',
+            type: 'success',
+            confirmButtonColor: '#005645',
+          })
+           //delete note if confirmed
+        this.props.dispatch({type: 'DELETE_NOTE', payload: this.props.match.params.id})
+        this.navBack();
         }
-      });
+      })
     }
 
     saveNote = ()=>{

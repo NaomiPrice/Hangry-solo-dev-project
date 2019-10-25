@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import './CollectionPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
@@ -53,7 +53,11 @@ class CollectionPage extends Component {
     //grab the name of the restaurant from the array based on the random number
     let restaurantChoice = this.props.reduxState.restaurants[randomNumber].name;
     //display the random selection to the user
-    swal("You should eat at:", restaurantChoice);
+    Swal.fire({
+      title: "You should eat at:", 
+      text: restaurantChoice,
+      confirmButtonColor: '#005645'
+    });
   }
 
   render(){

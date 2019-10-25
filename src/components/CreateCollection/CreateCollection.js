@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 import './CreateCollection.css';
@@ -20,7 +20,9 @@ class CreateCollection extends Component {
 
     saveCollection = ()=>{
       if(this.state.newCollection ===''){
-        return swal("Plese enter a collection name or select 'back' to cancel");
+        return Swal.fire({
+          text: "Plese enter a collection name or select 'back' to cancel",
+          confirmButtonColor: '#005645'});
       }
       //when save button is clicked. send new collection to post in DB
       this.props.dispatch({type: 'ADD_COLLECTION', payload: this.state})

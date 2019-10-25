@@ -12,6 +12,7 @@ class UserPage extends Component {
   componentDidMount = ()=>{
     this.props.dispatch({type: 'GET_COLLECTIONS'})
   }
+
   addCollection = ()=>{
     this.props.history.push('/addCollection');
   }
@@ -43,8 +44,7 @@ class UserPage extends Component {
           <button className="addBtn" onClick={this.addCollection}><FontAwesomeIcon icon={faPlusCircle}/> ADD COLLECTION</button>
           <button className="addBtn" onClick={this.addRestaurant}><FontAwesomeIcon icon={faPlusCircle}/> ADD RESTAURANT</button>
         </div>
-        
-        
+      
         <div className="displayCollections">
           <p className="collectionP">Collections:</p>
           { this.props.reduxState.collections[0] ? 

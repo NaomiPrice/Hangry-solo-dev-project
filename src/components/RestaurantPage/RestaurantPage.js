@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import GooglePlacesInfo from '../GooglePlacesInfo/GooglePlacesInfo';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faPencilAlt, faTrashAlt, faChevronLeft, faHome } from '@fortawesome/free-solid-svg-icons';
 import './RestaurantPage.css';
@@ -29,25 +29,27 @@ class RestaurantPage extends Component {
 
     deleteRestaurant = (id)=>{
       //before deleting restaurant, verify user actions
-      swal({
-        title: "Are you sure?",
+      Swal.fire({
+        title: 'Are you sure?',
         text: "Once deleted, you will not be able to recover this restaurant and notes!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#005645',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
           let collectionId = this.props.reduxState.singleRestaurant.collection_id;
-          //fire off dispatch to delete restaurant from DB
+          //delete confirmed - delete from DataBase
           this.props.dispatch({type: 'DELETE_RESTAURANT', payload: id});
-          swal("Poof! Your restaurant has been deleted!", {
-            icon: "success",
-          });
-          //return to collection list of restaurants
-          this.goToCollection(collectionId);
-        } else {
-          swal("Your restaurant is safe!");
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Your file has been deleted.',
+            type: 'success',
+            confirmButtonColor: '#005645',
+          })
+           //navagate user back to collection
+           this.goToCollection(collectionId);
         }
       });
     }

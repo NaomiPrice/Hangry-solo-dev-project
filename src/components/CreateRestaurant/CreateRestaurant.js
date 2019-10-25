@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import './CreateRestaurant.css'
@@ -52,12 +52,20 @@ class CreateRestaurant extends Component {
       let collection = this.state.collectionId;
       //if all fields are not filled out, alert user
       if(name === '' || note === '' || collection === ''){
-        return swal("Plese fill out all fields or select 'back' to cancel");
+        return Swal.fire({
+          text: 'Please fill out all fields of select cancel',
+          confirmButtonColor: '#005645',
+        });
       };
       //if fields are filled out, dispatch data to Saga to be added to DataBase 
       this.props.dispatch({type: 'ADD_RESTAURANT', payload: this.state});
       //alert user of successful save
-      swal("Thank You!", "Your restaurant has been saved!", "success");
+      Swal.fire({
+        title: "Thank You!",
+        text: "Your restaurant has been saved!",
+        type: 'success',
+        confirmButtonColor: '#005645',
+      });
       //send user back to previous page
       this.navBack();
     }

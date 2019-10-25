@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 
@@ -15,7 +15,9 @@ class CreateNote extends Component {
     saveNote = ()=>{
       //if new note has not been created, return message for user
       if(this.state.newNote ===''){
-        return swal("Plese enter a note or cancel");
+        return Swal.fire({
+          text: "Plese enter a note or cancel",
+          confirmButtonColor: '#005645'});
       }
       //if note has been created, dispatch Saga to send to DataBase
       this.props.dispatch({type: 'ADD_NOTE', payload: this.state});
