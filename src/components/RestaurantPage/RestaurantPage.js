@@ -83,7 +83,7 @@ class RestaurantPage extends Component {
         canEdit: false,
         collectionId: event.target.value,
       }, ()=>{
-        //once state is set then dispatch Sata to update collection in DataBase
+        //once state is set then dispatch Sate to update collection in DataBase
         this.props.dispatch({type: 'UPDATE_COLLECTION', payload: this.state})
       });
     }

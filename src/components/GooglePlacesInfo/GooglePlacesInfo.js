@@ -52,7 +52,7 @@ class GooglePlcesInfo extends Component {
     getMyDistance = (lat1, lon1, lat2, lon2, unit)=> {
         //if all values are not yet accessible, return 0 
         if(!lat1 || !lon1 || !lat2 || !lon2){
-            return '0';
+            return null;
         }
         //calculate distance distance between two points with latitudet and longitude
         const radlat1 = Math.PI * lat1/180
@@ -112,7 +112,12 @@ class GooglePlcesInfo extends Component {
                </div>
                <div className="detailDiv">
                 <p>{this.displayPriceLevel()}</p>
-                <p>{Math.round(distance * 10)/10} miles away</p>
+                {
+                    distance ? 
+                    <p>{Math.round(distance * 10)/10} miles away</p> :
+                    <p>--</p>
+                }
+                
                </div>
             
            </div>
