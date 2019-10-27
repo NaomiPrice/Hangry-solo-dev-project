@@ -53,7 +53,7 @@ class CreateRestaurant extends Component {
       //if all fields are not filled out, alert user
       if(name === '' || note === '' || collection === ''){
         return Swal.fire({
-          text: 'Please fill out all fields of select cancel',
+          text: 'Please fill out all fields or select cancel',
           confirmButtonColor: '#005645',
         });
       };
