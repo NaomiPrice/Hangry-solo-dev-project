@@ -37,7 +37,7 @@ class CreateNote extends Component {
     }
     autoFill = ()=>{
       this.setState({
-        newNote: 'Goo eggs benedict and the kids pancake is the size of a plate!'
+        newNote: 'Good eggs benedict and the kids pancake is the size of a plate!'
       })
     }
 

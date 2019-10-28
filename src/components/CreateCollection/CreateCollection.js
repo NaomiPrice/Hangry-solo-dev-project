@@ -34,6 +34,12 @@ class CreateCollection extends Component {
         this.props.history.goBack();
     }
 
+    autoFill = ()=>{
+      this.setState({
+        newCollection: 'Brunch With Kids'
+      })
+    }
+
     render(){
       return (
         <div>
@@ -43,7 +49,7 @@ class CreateCollection extends Component {
            
           <div className="pageDiv">
             <h1>Add a new collection</h1>
-            <label className="newCollection"> 
+            <label className="newCollection" onClick={this.autoFill}> 
               <br></br>
               <input placeholder="new collection..." 
                     value={this.state.newCollection} 

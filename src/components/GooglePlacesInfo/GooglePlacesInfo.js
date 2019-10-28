@@ -116,7 +116,7 @@ class GooglePlcesInfo extends Component {
                 {
                     distance ? 
                     <p>{Math.round(distance * 10)/10} miles away</p> :
-                    <p>--</p>
+                    <p>-distance-</p>
                 }
                 
                </div>

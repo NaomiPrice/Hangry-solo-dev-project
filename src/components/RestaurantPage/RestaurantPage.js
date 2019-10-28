@@ -41,7 +41,7 @@ class RestaurantPage extends Component {
         if (result.value) {
           let collectionId = this.props.reduxState.singleRestaurant.collection_id;
           //delete confirmed - delete from DataBase
-          this.props.dispatch({type: 'DELETE_RESTAURANT', payload: id});
+          this.props.dispatch({type: 'DELETE_RESTAURANT', payload: this.state});
           Swal.fire({
             title: 'Deleted!',
             text: 'Your file has been deleted.',
