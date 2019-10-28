@@ -102,13 +102,14 @@ class GooglePlcesInfo extends Component {
         let placeLng = this.state.response.geometry.location.lng;
         //run distance between user and restaurant calculation
         const distance = this.getMyDistance(placeLat, placeLng, this.state.userLat, this.state.userLng, "M")
-        let address = this.state.response.address_components;
+        // let address = this.state.response.address_components;
         return(
             
            <div className="googleData">
                <div className="addressDiv">
-                <p>{address[0].short_name} {address[1].short_name},</p>
-                <p>{address[2].short_name}, {address[4].short_name} {address[6].short_name}</p>
+                   <p>{this.state.response.formatted_address}</p>
+                {/* <p>{address[0].short_name} {address[1].short_name},</p>
+                <p>{address[2].short_name}, {address[4].short_name} {address[6].short_name}</p> */}
                </div>
                <div className="detailDiv">
                 <p>{this.displayPriceLevel()}</p>
