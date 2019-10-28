@@ -66,10 +66,13 @@ class CreateRestaurant extends Component {
         type: 'success',
         confirmButtonColor: '#005645',
       });
-      //send user back to previous page
-      this.navBack();
+      //send user to collection list to see restaurant
+      this.goToCollection(this.state.collectionId);
     }
 
+    goToCollection = (id)=>{
+      this.props.history.push(`/collection/${id}`);
+    }
     navBack = ()=>{
         this.props.history.goBack();
     }
