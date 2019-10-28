@@ -86,7 +86,12 @@ class CreateRestaurant extends Component {
         [propertyName]: event.target.value
       })
     }
-
+    autoFill = ()=>{
+      console.log('auto fill fired');
+      this.setState({
+        newNote: 'They have toy baskets for the littles'
+      })
+    }
     render(){
       //map through collections for user to populate 
       const options = this.props.reduxState.collections.map((collection)=>{
@@ -117,9 +122,9 @@ class CreateRestaurant extends Component {
             
             <br></br>
 
-            <label>Leave a Note: 
+            <label onClick={this.autoFill}>Leave a Note: 
               <br></br>
-              <textarea className="description" rows="6" type="text" value={this.state.note} 
+              <textarea className="description" rows="6" type="text" value={this.state.newNote} 
                   onChange={(event)=>{this.handleChange('newNote', event)}}></textarea>
             </label>
            
