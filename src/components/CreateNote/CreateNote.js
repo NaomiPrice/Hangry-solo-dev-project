@@ -35,11 +35,7 @@ class CreateNote extends Component {
         newNote: event.target.value
       })
     }
-    autoFill = ()=>{
-      this.setState({
-        newNote: 'Good eggs benedict and the kids pancake is the size of a plate!'
-      })
-    }
+   
 
     render(){
       return (
@@ -49,7 +45,7 @@ class CreateNote extends Component {
           </div> 
           <div className="pageDiv">
             <h1>Add a Note</h1>
-            <label onClick={this.autoFill}> Note:
+            <label > Note:
                 <br></br>
                 <textarea className="description" rows="6" type="text" 
                 value={this.state.newNote} placeholder="add a new note"
