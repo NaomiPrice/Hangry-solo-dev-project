@@ -3,6 +3,11 @@
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
+
+-- Create a new database called `prime_app`
+-- If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+
+
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
