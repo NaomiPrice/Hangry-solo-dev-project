@@ -1,4 +1,4 @@
-# Hangry! Serving up restaurants when you need them most
+# Hangry! 
 Serving up restaurants when you need them most.
 
 When hungry, I never seem to remember the list of restauratns I am excited about trying so I eat at the same places far too often. 
@@ -53,7 +53,7 @@ Create the tables listed in the database.sql file.
 
 
 ### Next Steps
-- [] users can share restaurants between users through application 
+- [ ] users can share restaurants between users through application 
 
 
 ## Production Build
